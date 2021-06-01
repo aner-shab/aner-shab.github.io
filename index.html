@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+}
+
+code{
+  background-color: #d3d8e0;
+  word-wrap: break-word;
+  padding: .1rem .3rem .2rem;
+  border-radius: .2rem;
+}
+
+h2 ~ article:nth-child(odd) {
+  background-color: #f0f2f7;
+}
+h2 ~ article {
+  padding-left: 8px;
+  padding-bottom: 2px;
+}
+
+.script{
+  padding-left: 12px;
+}
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+
+.sidebar a {
+  height: 18px;
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  background: linear-gradient(to left, transparent 50%, #3399cc 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+  outline: none;
+  font-weight: bold;
+}
+
+.sidebar a.active {
+  background-position: left;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #43c4ff;
+  color: white;
+}
+
+.sidebar a.sub {
+  padding: 8px;
+  padding-left: 30px;
+  font-size: 14px;
+  background: linear-gradient(to left, transparent 50%, #3BC9CD 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+  background-color: #e0dede;
+  font-weight:normal;
+}
+.sidebar a.sub.active {
+  background-position: left;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+<script>
+  function hasClass(id, className)
+  {
+    var el = document.getElementById(id);
+    if (el.classList)
+      return el.classList.contains(className);
+    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+  }
+
+  function addClass(id, className)
+  {
+    var el = document.getElementById(id);
+    if (el.classList)
+      el.classList.add(className)
+    else if (!hasClass(el, className))
+      el.className += " " + className;
+  }
+
+  function removeClass(id, className)
+  {
+    var el = document.getElementById(id);
+    if (!el || !id || !className)
+      return;
+    if (el.classList)
+      el.classList.remove(className)
+    else if (hasClass(el, className))
+    {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+      el.className = el.className.replace(reg, ' ');
+    }
+  }
+
+
+  function jumpToTopic(e, id, subtopic){
+    var targetId = `$${id}`;
+    if (subtopic){
+      var targetSubtopic = `$${subtopic}`;
+    }
+    if (hasClass(targetSubtopic ? targetSubtopic : targetId, 'active')){
+      return;
+    }
+    topics.forEach(element => removeClass(`$${element}`, 'active'));
+    subtopics.forEach(element => removeClass(`$${element}`, 'active'));
+    addClass(targetId, 'active');
+    if (subtopic){
+      addClass(targetSubtopic, 'active');
+    }
+  }
+
+  const topics = ['intro','env','terminal','projects','practices','qa','deployment'];
+  const subtopics = ['k8s','nginx','envsetup','zsh','scripts'];
+
+</script>
+</head>
+<body>
+
+<div class="sidebar">
+  <a id="$intro" class="active" onclick="jumpToTopic(event, 'intro')" href="#intro">Introduction</a>
+  <a id="$env" onclick="jumpToTopic(event, 'env')" href="#env">Environment</a>
+    <a id="$k8s" class="sub" onclick="jumpToTopic(event, 'env', 'k8s')" href="#k8s">Kubernetes</a>
+    <a id="$nginx" class="sub" onclick="jumpToTopic(event, 'env', 'nginx')" href="#nginx">Nginx</a>
+    <a id="$envsetup" class="sub" onclick="jumpToTopic(event, 'env', 'envsetup')" href="#envsetup">Environment Setup</a>
+  <a id="$terminal" onclick="jumpToTopic(event, 'terminal')" href="#terminal">Terminal</a>
+    <a id="$zsh" class="sub" onclick="jumpToTopic(event, 'terminal', 'zsh')" href="#zsh">.zshrc / .bashrc</a>
+    <a id="$scripts" class="sub" onclick="jumpToTopic(event, 'terminal', 'scripts')" href="#scripts">Scripts</a>
+  <a id="$projects" onclick="jumpToTopic(event, 'projects')" href="#projects">Projects</a>
+  <a id="$practices" onclick="jumpToTopic(event, 'practices')" href="#practices">Best Practices</a>
+  <a id="$qa" onclick="jumpToTopic(event, 'qa')" href="#qa">QA & Automation</a>
+  <a id="$deployment" onclick="jumpToTopic(event, 'deployment')" href="#deployment">Deployment</a>
+  <a id="$circle" class="sub" onclick="jumpToTopic(event, 'deployment', 'circle')" href="#circle">Circle CI</a>
+</div>
+
+<div class="content">
+  <h1 id="intro">Bizzabo Frontend How-To Guide</h1>
+  <p>This document will serve the purpose of being a starting guide for new Bizzabo front end developers.</p>
+  <p>It will focus on two issues lacking in the current onboarding process: environment setup and understanding the architecture.</p>
+  <p>This document is to be kept relatively light. If you contribute to it, try not to go beyond surface-level information.</p>
+  <p>If you are curious and want to know or understand more than what is needed to work with, ask your fellow Bizzadevs!</p>
+  <h2 id="env">Environment</h2>
+    WIP A quick description of the environment. WIP
+    <article>
+      <h3 id="k8s">Kubernetes</h3>
+      You do not need to "know" Kubernetes as a Frontend developer, but it's important to understand that all of our projects run on it.
+      <br><br>A simple explanation is this:
+      <ul>* Each developer has their own environment that runs on Kubernetes (k8s).</ul>
+      <ul>* Each environment is made up of all the services/microservices needed to run Bizzabo - backend and frontend.</ul>
+      <ul>* Every service/microservice that runs on a k8s environment is called a "pod".</ul>
+      <ul>* You can connect to other developers' k8s environments and vice-versa (when connected to dev VPN, of course 😎).</ul>
+      <ul>* You can deploy changes to any k8s environment in order to test them outside of production.</ul>
+      <ul>* Running a project locally means other people will not see your changes on that specific project/pod.</ul>
+      <ul>* You run projects by redirecting the domain to 127.0.0.1 under /etc/hosts.</ul>
+      <ul>* This means that even though you may run a specific project locally, it will still communicate with k8s-run pods.</ul>
+    </article>
+    <article>
+      <h3 id="nginx">Nginx</h3>
+      WIP We use nginx to serve our files. Blah blah Blah WIP
+      <br>Nginx config, commands, setup
+    </article>
+    <article>
+      <h3 id="nginx">Environment Setup</h3>
+      AWS, terraform, pip, etc
+    </article>
+  <hr>
+  <h2 id="terminal">Terminal</h2>
+  <article>
+      The prefered terminal in use at Bizzabo is iTerm2 with <code>zsh</code> installed.<br>
+      <ul><a href="https://iterm2.com/">iTerm2</a></ul>
+      <ul>zsh: <code>brew install zsh</code></ul>
+    </article>
+    <article>
+      <h3 id="zsh">.zshrc / .bashrc</h3>
+      You may configure and customize your terminal in any way you like by configuring the file ~/.zshrc (or, if you use something other than zsh, ~/.bashrc).<br>
+      <br>Here are some important & useful customizations:<br>
+      <pre></pre><code>export AWS_PROFILE=dev</code>
+      <pre></pre><code>export ENV={YOUR ENVIRONMENT NAME}</code>
+      <br><br>Note that you must open a new terminal tab/window for .zshrc file changes to take effect.
+    </article>
+    <article>
+      <h3 id="scripts">Scripts</h3>
+        This is a list of scripts that can be used to maximize efficiency while you work. To run them from anywhere in your terminal, you can download them all to a single folder, and either:
+        <ul>* Add that folder to your <code>export PATH=...</code> line in .zshrc</ul>
+        <ul>* Add individual aliases to your .zshrc file, like so: <code>alias someCommand="~/path/to/scripts/script.sh"</code>,<br>
+        where someCommand may be changed for whatever command you'd like to use to call the script.</ul>
+        <strong>Important:</strong> You will need to run the following command from the scripts folder, or the scripts will not run:
+        <pre><code>sudo chmod +x ./*.sh</code></pre>
+        <div class="script">
+          <h4 id="script_init"><a href="init.sh">init.sh script</a></h4>
+          This script will pull the latest changes from the <code>helm-assembly</code> repository. It will then update charts, and upgrades your environment (based on your $ENV variable).
+          <br>You may also pass an argument to the script in order to upgrade a different environment.
+          <br><br>Usage:<br><pre></pre>
+          <code>init</code> (for your default environment)<br><pre></pre>
+          <code>init some-other-env</code> (for any other environment)<br><pre></pre>
+        </div>
+        <div class="script">
+          <h4 id="script_sqlport"><a href="sqlport.sh">sqlport.sh script</a></h4>
+          This script will redirect your k8s <code>mysql</code> pod to a local port you can connect to using apps like Sequel Ace.
+          <br><br>Usage:<br>
+          <pre><code>sqlport</code></pre>
+        </div>
+        <div class="script"><h4 id="script_uselocal">uselocal.sh script</h4>
+          <small><code>uselocal</code> is available under <code>/helm-assembly/scripts</code> -- you do not need to download it.</small>
+          <br><br>This script will comment/uncomment all redirects to 127.0.0.1.
+          <br><br>Usage:<br>
+          <pre></pre>
+          <code>uselocal on</code> (to un-comment all redirects to 127.0.0.1)<br><pre></pre>
+          <code>uselocal off</code> (to comment all redirects to 127.0.0.1)<br><pre></pre>
+          <strong>PLEASE NOTE:</strong> The script assumes that the line:
+          <pre><code>127.0.0.1    localhost</code></pre>
+          is the first redirect instance in the file, and will not comment it in case of 'off'.
+        </div>
+        <div class="script"><h4 id="script_helmtag">helmtag.sh script</h4>
+          <small><code>helmtag</code> is available under <code>/helm-assembly/scripts</code> -- you do not need to download it.</small>
+          <br><br>
+          This script is an automated solution to set image tags (single or multiple) easily without having to chase down the right command and edit it manually.
+          <br><br>
+          Usage:
+          <pre><code>helmtag &#60;image> &#60;tag> &#60;image> &#60;tag> ...</code></pre>
+          For example:
+          <pre><code>helmtag webdashboard 9999 agenda 1111</code></pre>
+          This will deploy the web-dashboard project image with build 9999 and the agenda project image with build 1111 to your personal workspace.
+          <br><br>There is no limit to the amount of parameters you can input. Setting no parameters will deploy with the tags set in your local working directory.
+          <br><br>The script will first attempt to git pull the latest helm-assembly revision for your current local branch. If it fails, you will need to fix any conflicts and try again.
+          <br><br>It will then proceed to make a diff between the tags in your current deployment to the ones you are targeting and prompt you to confirm the changes (y/n).
+          <br>Once you do, the new environment will be deployed.
+        </div>
+        <div class="script"><h4 id="script_pods"><a href="pods.sh">pods.sh script</a></h4>
+          This script will list all active k8s pods on your environment, their uptime, and status.
+          <br><br>Usage:<br>
+          <pre><code>pods</code></pre>
+        </div>
+      </article>
+    <hr>
+  <h2 id="projects">Projects</h2>
+    <article>WIP here is a list of projects and what each of them is for. WIP
+    Every project has its own running and testing schemes. Check their README files.</article>
+    <hr>
+  <h2 id="practices">Best Practices</h2>
+    <article>WIP code review conventions, etc WIP </article>
+    <hr>
+  <h2 id="qa">QA & Automation</h2>
+    <article>WIP qa env, nightwatch, etc </article>
+    <hr>
+  <h2 id="deployment">Deployment</h2>
+    <article>Deployment workflow</article>
+    <article>
+      <h3 id="circle">Circle CI</h3>
+      WIP stuff
+    </article>
+
+</div>
+
+</body>
+</html>
