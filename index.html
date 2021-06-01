@@ -151,7 +151,7 @@ div.content {
   }
 
   const topics = ['intro','env','terminal','projects','practices','qa','deployment'];
-  const subtopics = ['k8s','envsetup','zsh','scripts','circle'];
+  const subtopics = ['k8s','envsetup','zsh','scripts','circle','overview','running'];
 
 </script>
 </head>
@@ -166,6 +166,8 @@ div.content {
     <a id="$zsh" class="sub" onclick="jumpToTopic(event, 'terminal', 'zsh')" href="#zsh">zsh</a>
     <a id="$scripts" class="sub" onclick="jumpToTopic(event, 'terminal', 'scripts')" href="#scripts">Scripts</a>
   <a id="$projects" onclick="jumpToTopic(event, 'projects')" href="#projects">Projects</a>
+    <a id="$overview" class="sub" onclick="jumpToTopic(event, 'projects', 'overview')" href="#overview">Overview</a>
+    <a id="$running" class="sub" onclick="jumpToTopic(event, 'projects', 'running')" href="#running">Running Locally</a>
   <a id="$practices" onclick="jumpToTopic(event, 'practices')" href="#practices">Best Practices</a>
   <a id="$qa" onclick="jumpToTopic(event, 'qa')" href="#qa">QA & Automation</a>
   <a id="$deployment" onclick="jumpToTopic(event, 'deployment')" href="#deployment">Deployment</a>
@@ -290,13 +292,19 @@ div.content {
       </article>
     <hr>
   <h2 id="projects">Projects</h2>
-    <article>Every project has its own running and testing schemes. Check their README files.
-      <ul>● <samp>web-dashboard</samp> : WIP what is Dashboard</ul>
-      <ul>● <samp>web-attendee</samp> : WIP what is Attendee</ul>
-      <ul>● <samp>fe-core</samp> : WIP what is FE Core</ul>
-      <ul>● <samp>fe-modules</samp> : WIP what is FE modules</ul>
-      <ul>● <samp>ring</samp> : WIP what is Ring</ul>
-      <ul>● <samp>web-partners</samp> : WIP what is Partners</ul>
+    <article>
+      <h3 id="overview">Overview</h3>
+      Every project has its own running and testing schemes. Check their README files.
+        <ul>● <samp>web-dashboard</samp> : WIP what is Dashboard</ul>
+        <ul>● <samp>web-attendee</samp> : WIP what is Attendee</ul>
+        <ul>● <samp>fe-core</samp> : WIP what is FE Core</ul>
+        <ul>● <samp>fe-modules</samp> : WIP what is FE modules</ul>
+        <ul>● <samp>ring</samp> : WIP what is Ring</ul>
+        <ul>● <samp>web-partners</samp> : WIP what is Partners</ul>
+    </article>
+    <article>
+      <h3 id="running">Running Locally</h3>
+      npmrc, bzenvk8s, etc etc
     </article>
     <hr>
   <h2 id="practices">Best Practices</h2>
