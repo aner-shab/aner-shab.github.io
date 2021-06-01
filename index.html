@@ -148,7 +148,7 @@ div.content {
   }
 
   const topics = ['intro','env','terminal','projects','practices','qa','deployment'];
-  const subtopics = ['k8s','nginx','envsetup','zsh','scripts'];
+  const subtopics = ['k8s','nginx','envsetup','zsh','scripts','circle'];
 
 </script>
 </head>
@@ -182,14 +182,14 @@ div.content {
       <h3 id="k8s">Kubernetes</h3>
       You do not need to "know" Kubernetes as a Frontend developer, but it's important to understand that all of our projects run on it.
       <br><br>A simple explanation is this:
-      <ul>* Each developer has their own environment that runs on Kubernetes (k8s).</ul>
-      <ul>* Each environment is made up of all the services/microservices needed to run Bizzabo - backend and frontend.</ul>
-      <ul>* Every service/microservice that runs on a k8s environment is called a "pod".</ul>
-      <ul>* You can connect to other developers' k8s environments and vice-versa (when connected to dev VPN, of course 😎).</ul>
-      <ul>* You can deploy changes to any k8s environment in order to test them outside of production.</ul>
-      <ul>* Running a project locally means other people will not see your changes on that specific project/pod.</ul>
-      <ul>* You run projects by redirecting the domain to 127.0.0.1 under /etc/hosts.</ul>
-      <ul>* This means that even though you may run a specific project locally, it will still communicate with k8s-run pods.</ul>
+      <ul>● Each developer has their own environment that runs on Kubernetes (k8s).</ul>
+      <ul>● Each environment is made up of all the services/microservices needed to run Bizzabo - backend and frontend.</ul>
+      <ul>● Every service/microservice that runs on a k8s environment is called a "pod".</ul>
+      <ul>● You can connect to other developers' k8s environments and vice-versa (when connected to dev VPN, of course 😎).</ul>
+      <ul>● You can deploy changes to any k8s environment in order to test them outside of production.</ul>
+      <ul>● Running a project locally means other people will not see your changes on that specific project/pod.</ul>
+      <ul>● You run projects locally by redirecting the domain to 127.0.0.1 under /etc/hosts.</ul>
+      <ul>● This means that even though you may run a specific project locally, it will still communicate with k8s-run pods.</ul>
     </article>
     <article>
       <h3 id="nginx">Nginx</h3>
@@ -226,7 +226,7 @@ div.content {
         <div class="script">
           <h4 id="script_init"><a href="init.sh">init.sh script</a></h4>
           This script will pull the latest changes from the <code>helm-assembly</code> repository. It will then update charts, and upgrades your environment (based on your $ENV variable).
-          <br>You may also pass an argument to the script in order to upgrade a different environment.
+          <br><br>You may also pass an argument to the script in order to upgrade a different environment.
           <br><br>Usage:<br><pre></pre>
           <code>init</code> (for your default environment)<br><pre></pre>
           <code>init some-other-env</code> (for any other environment)<br><pre></pre>
