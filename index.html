@@ -175,8 +175,7 @@ div.content {
 <div class="content">
   <h1 id="intro">Bizzabo Frontend How-To Guide</h1>
   <p>This document will serve the purpose of being a starting guide for new Bizzabo front end developers.</p>
-  <p>It will focus on two issues lacking in the current onboarding process: environment setup and understanding the architecture.</p>
-  <p>This document is to be kept relatively light. If you contribute to it, try not to go beyond surface-level information.</p>
+  <p>It is to be kept relatively light. If you contribute to it, try not to go beyond surface-level information.</p>
   <p>If you are curious and want to know or understand more than what is needed to work with, ask your fellow Bizzadevs!</p>
   <h2 id="env">Environment</h2>
     <article>
@@ -189,8 +188,8 @@ div.content {
       <ul>● You can connect to other developers' k8s environments and vice-versa (when connected to dev VPN, of course 😎).</ul>
       <ul>● You can deploy changes to any k8s environment in order to test them outside of production.</ul>
       <ul>● Running a project locally means other people will not see your changes on that specific project/pod.</ul>
-      <ul>● You run projects locally by redirecting the domain to 127.0.0.1 under /etc/hosts.</ul>
-      <ul>● This means that even though you may run a specific project locally, it will still communicate with k8s-run pods.</ul>
+      <ul>● Projects that run locally do so by redirecting the domain to 127.0.0.1 under /etc/hosts.</ul>
+      <ul>● This means that even though you may run a specific project locally, it will still communicate with pods running on k8s.</ul>
     </article>
     <article>
       <h3 id="envsetup">Environment Setup</h3>
@@ -277,7 +276,7 @@ div.content {
           <pre><code>helmtag &#60;image> &#60;tag> &#60;image> &#60;tag> ...</code></pre>
           For example:
           <pre><code>helmtag webdashboard 9999 agenda 1111</code></pre>
-          This will deploy the web-dashboard project image with build 9999 and the agenda project image with build 1111 to your personal workspace.
+          This will deploy the <samp>webdashboard</samp> project image with build 9999 and the <samp>agenda</samp> project image with build 1111 to your personal workspace.
           <br><br>There is no limit to the amount of parameters you can input. Setting no parameters will deploy with the tags set in your local working directory.
           <br><br>The script will first attempt to git pull the latest helm-assembly revision for your current local branch. If it fails, you will need to fix any conflicts and try again.
           <br><br>It will then proceed to make a diff between the tags in your current deployment to the ones you are targeting and prompt you to confirm the changes (y/n).
@@ -291,8 +290,14 @@ div.content {
       </article>
     <hr>
   <h2 id="projects">Projects</h2>
-    <article class="wip">WIP here is a list of projects and what each of them is for. WIP
-    Every project has its own running and testing schemes. Check their README files.</article>
+    <article>Every project has its own running and testing schemes. Check their README files.
+      <ul>● <samp>web-dashboard</samp> : WIP what is Dashboard</ul>
+      <ul>● <samp>web-attendee</samp> : WIP what is Attendee</ul>
+      <ul>● <samp>fe-core</samp> : WIP what is FE Core</ul>
+      <ul>● <samp>fe-modules</samp> : WIP what is FE modules</ul>
+      <ul>● <samp>ring</samp> : WIP what is Ring</ul>
+      <ul>● <samp>web-partners</samp> : WIP what is Partners</ul>
+    </article>
     <hr>
   <h2 id="practices">Best Practices</h2>
     <article class="wip">WIP code review conventions, etc WIP </article>
