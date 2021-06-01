@@ -23,7 +23,10 @@ h2 ~ article {
   padding-left: 8px;
   padding-bottom: 2px;
 }
-
+.wip{
+  color: red;
+  font-weight: bold;
+}
 .script{
   padding-left: 12px;
 }
@@ -148,7 +151,7 @@ div.content {
   }
 
   const topics = ['intro','env','terminal','projects','practices','qa','deployment'];
-  const subtopics = ['k8s','nginx','envsetup','zsh','scripts','circle'];
+  const subtopics = ['k8s','envsetup','zsh','scripts','circle'];
 
 </script>
 </head>
@@ -158,10 +161,9 @@ div.content {
   <a id="$intro" class="active" onclick="jumpToTopic(event, 'intro')" href="#intro">Introduction</a>
   <a id="$env" onclick="jumpToTopic(event, 'env')" href="#env">Environment</a>
     <a id="$k8s" class="sub" onclick="jumpToTopic(event, 'env', 'k8s')" href="#k8s">Kubernetes</a>
-    <a id="$nginx" class="sub" onclick="jumpToTopic(event, 'env', 'nginx')" href="#nginx">Nginx</a>
     <a id="$envsetup" class="sub" onclick="jumpToTopic(event, 'env', 'envsetup')" href="#envsetup">Environment Setup</a>
   <a id="$terminal" onclick="jumpToTopic(event, 'terminal')" href="#terminal">Terminal</a>
-    <a id="$zsh" class="sub" onclick="jumpToTopic(event, 'terminal', 'zsh')" href="#zsh">.zshrc / .bashrc</a>
+    <a id="$zsh" class="sub" onclick="jumpToTopic(event, 'terminal', 'zsh')" href="#zsh">zsh</a>
     <a id="$scripts" class="sub" onclick="jumpToTopic(event, 'terminal', 'scripts')" href="#scripts">Scripts</a>
   <a id="$projects" onclick="jumpToTopic(event, 'projects')" href="#projects">Projects</a>
   <a id="$practices" onclick="jumpToTopic(event, 'practices')" href="#practices">Best Practices</a>
@@ -177,7 +179,6 @@ div.content {
   <p>This document is to be kept relatively light. If you contribute to it, try not to go beyond surface-level information.</p>
   <p>If you are curious and want to know or understand more than what is needed to work with, ask your fellow Bizzadevs!</p>
   <h2 id="env">Environment</h2>
-    WIP A quick description of the environment. WIP
     <article>
       <h3 id="k8s">Kubernetes</h3>
       You do not need to "know" Kubernetes as a Frontend developer, but it's important to understand that all of our projects run on it.
@@ -192,39 +193,58 @@ div.content {
       <ul>● This means that even though you may run a specific project locally, it will still communicate with k8s-run pods.</ul>
     </article>
     <article>
-      <h3 id="nginx">Nginx</h3>
-      WIP We use nginx to serve our files. Blah blah Blah WIP
-      <br>Nginx config, commands, setup
-    </article>
-    <article>
-      <h3 id="nginx">Environment Setup</h3>
-      AWS, terraform, pip, etc
+      <h3 id="envsetup">Environment Setup</h3>
+      To setup your environment, follow the next steps. You will only need to go through this process once:
+      <ul>1. <input type="checkbox"/> <a href="https://nodejs.org">Install Node.js</a></ul>
+      <ul>2. <input type="checkbox"/> <a href="http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/">Install Nginx</a></ul>
+      <ul>3. Install <code>pip</code>. In terminal:<pre></pre>
+          <ul><input type="checkbox"/> <code>curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py</code></ul><pre></pre>
+          <ul><input type="checkbox"/>  <code>python get-pip.py</code></ul>
+      </ul>
+      <ul>4. Configure Nginx. In terminal:<pre></pre>
+        <ul><input type="checkbox"/>  <a href="nginx.conf">Download Bizzabo configuration file</a></ul><pre></pre>
+        <ul><input type="checkbox"/>  In the terminal, navigate to the directory where the above file is found.</ul><pre></pre>
+        <ul><input type="checkbox"/>  <code>sudo mkdir -p /var/log/nginx</code></ul><pre></pre>
+        <ul><input type="checkbox"/>  Copy the .conf file to the above dir: <code>mv ./nginx.conf /var/log/nginx/nginx.conf</code></ul>
+      </ul>
+      <ul>5. <input type="checkbox"/> Configure your k8s context. In terminal:<pre></pre>
+        <ul><code>kubectl config set-context --current --namespace=YOUR_ENVIRONMENT_NAME</code></ul>
+      </ul>
+      <ul>6. <input type="checkbox"/> Customize your .zshrc file as described in <a href="#zsh">the <samp>zsh</samp> topic.</a>
+      <ul><br>Having <code>AWS_PROFILE</code> and <code>ENV</code> variables set in your system is necessary for most of Bizzabo's scripts!</ul>
+      </ul>
+      <ul>7. Follow the following steps from the <a href="https://github.com/bizzabo/helm-assembly"><samp>helm-assembly</samp></a> README.md:<pre></pre>
+        <ul><input type="checkbox"/> Tools Installation (kubectl, helm, terraform, telepresence, awscli, stern, kubectx)</ul><pre></pre>
+        <ul><input type="checkbox"/> Local Setup</ul><pre></pre>
+        <ul><input type="checkbox"/> Create AWS Resources</ul><pre></pre>
+        <ul><input type="checkbox"/> Install Bizzabo Services (pay close attention to the NAME variable set in the script)</ul><pre></pre>
+      </ul>
     </article>
   <hr>
   <h2 id="terminal">Terminal</h2>
   <article>
       The prefered terminal in use at Bizzabo is iTerm2 with <code>zsh</code> installed.<br>
-      <ul><a href="https://iterm2.com/">iTerm2</a></ul>
-      <ul>zsh: <code>brew install zsh</code></ul>
+      <ul>● <a href="https://iterm2.com/">iTerm2</a></ul>
+      <ul>● zsh: <code>brew install zsh</code></ul>
     </article>
     <article>
-      <h3 id="zsh">.zshrc / .bashrc</h3>
-      You may configure and customize your terminal in any way you like by configuring the file ~/.zshrc (or, if you use something other than zsh, ~/.bashrc).<br>
+      <h3 id="zsh">zsh</h3>
+      You may configure and customize your terminal in any way you like by configuring the file <samp>~/.zshrc</samp> (or, if you use something other than zsh, <samp>~/.bashrc</samp>).<br>
       <br>Here are some important & useful customizations:<br>
       <pre></pre><code>export AWS_PROFILE=dev</code>
-      <pre></pre><code>export ENV={YOUR ENVIRONMENT NAME}</code>
+      <pre></pre><code>export ENV=YOUR_ENVIRONMENT_NAME}</code>
       <br><br>Note that you must open a new terminal tab/window for .zshrc file changes to take effect.
     </article>
     <article>
       <h3 id="scripts">Scripts</h3>
         This is a list of scripts that can be used to maximize efficiency while you work. To run them from anywhere in your terminal, you can download them all to a single folder, and either:
-        <ul>* Add that folder to your <code>export PATH=...</code> line in .zshrc</ul>
-        <ul>* Add individual aliases to your .zshrc file, like so: <code>alias someCommand="~/path/to/scripts/script.sh"</code>,<br>
+        <ul>● Add that folder to your <code>export PATH=...</code> line in .zshrc</ul>
+        <ul>● Add individual aliases to your .zshrc file, like so: <code>alias someCommand="~/path/to/scripts/script.sh"</code>,<br>
         where someCommand may be changed for whatever command you'd like to use to call the script.</ul>
         <strong>Important:</strong> You will need to run the following command from the scripts folder, or the scripts will not run:
         <pre><code>sudo chmod +x ./*.sh</code></pre>
         <div class="script">
-          <h4 id="script_init"><a href="init.sh">init.sh script</a></h4>
+          <h4 id="script_init">💾 <a href="init.sh">init.sh script</a></h4>
           This script will pull the latest changes from the <code>helm-assembly</code> repository. It will then update charts, and upgrades your environment (based on your $ENV variable).
           <br><br>You may also pass an argument to the script in order to upgrade a different environment.
           <br><br>Usage:<br><pre></pre>
@@ -232,13 +252,13 @@ div.content {
           <code>init some-other-env</code> (for any other environment)<br><pre></pre>
         </div>
         <div class="script">
-          <h4 id="script_sqlport"><a href="sqlport.sh">sqlport.sh script</a></h4>
+          <h4 id="script_sqlport">💾 <a href="sqlport.sh">sqlport.sh script</a></h4>
           This script will redirect your k8s <code>mysql</code> pod to a local port you can connect to using apps like Sequel Ace.
           <br><br>Usage:<br>
           <pre><code>sqlport</code></pre>
         </div>
-        <div class="script"><h4 id="script_uselocal">uselocal.sh script</h4>
-          <small><code>uselocal</code> is available under <code>/helm-assembly/scripts</code> -- you do not need to download it.</small>
+        <div class="script"><h4 id="script_uselocal">💾 uselocal.sh script</h4>
+          <small><code>uselocal</code> is available under <code>/helm-assembly/scripts</code> — you do not need to download it.</small>
           <br><br>This script will comment/uncomment all redirects to 127.0.0.1.
           <br><br>Usage:<br>
           <pre></pre>
@@ -248,8 +268,8 @@ div.content {
           <pre><code>127.0.0.1    localhost</code></pre>
           is the first redirect instance in the file, and will not comment it in case of 'off'.
         </div>
-        <div class="script"><h4 id="script_helmtag">helmtag.sh script</h4>
-          <small><code>helmtag</code> is available under <code>/helm-assembly/scripts</code> -- you do not need to download it.</small>
+        <div class="script"><h4 id="script_helmtag">💾 helmtag.sh script</h4>
+          <small><code>helmtag</code> is available under <code>/helm-assembly/scripts</code> — you do not need to download it.</small>
           <br><br>
           This script is an automated solution to set image tags (single or multiple) easily without having to chase down the right command and edit it manually.
           <br><br>
@@ -263,7 +283,7 @@ div.content {
           <br><br>It will then proceed to make a diff between the tags in your current deployment to the ones you are targeting and prompt you to confirm the changes (y/n).
           <br>Once you do, the new environment will be deployed.
         </div>
-        <div class="script"><h4 id="script_pods"><a href="pods.sh">pods.sh script</a></h4>
+        <div class="script"><h4 id="script_pods">💾 <a href="pods.sh">pods.sh script</a></h4>
           This script will list all active k8s pods on your environment, their uptime, and status.
           <br><br>Usage:<br>
           <pre><code>pods</code></pre>
@@ -271,17 +291,17 @@ div.content {
       </article>
     <hr>
   <h2 id="projects">Projects</h2>
-    <article>WIP here is a list of projects and what each of them is for. WIP
+    <article class="wip">WIP here is a list of projects and what each of them is for. WIP
     Every project has its own running and testing schemes. Check their README files.</article>
     <hr>
   <h2 id="practices">Best Practices</h2>
-    <article>WIP code review conventions, etc WIP </article>
+    <article class="wip">WIP code review conventions, etc WIP </article>
     <hr>
   <h2 id="qa">QA & Automation</h2>
-    <article>WIP qa env, nightwatch, etc </article>
+    <article class="wip">WIP qa env, nightwatch, etc </article>
     <hr>
   <h2 id="deployment">Deployment</h2>
-    <article>Deployment workflow</article>
+    <article class="wip">Deployment workflow</article>
     <article>
       <h3 id="circle">Circle CI</h3>
       WIP stuff
