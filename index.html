@@ -8,14 +8,12 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 14px;
 }
-
 code{
   background-color: #d3d8e0;
   word-wrap: break-word;
   padding: .1rem .3rem .2rem;
   border-radius: .2rem;
 }
-
 h2 ~ article:nth-child(odd) {
   background-color: #f0f2f7;
 }
@@ -39,8 +37,6 @@ h2 ~ article {
   height: 100%;
   overflow: auto;
 }
-
-
 .sidebar a {
   height: 18px;
   display: block;
@@ -53,17 +49,14 @@ h2 ~ article {
   outline: none;
   font-weight: bold;
 }
-
 .sidebar a.active {
   background-position: left;
   color: white;
 }
-
 .sidebar a:hover:not(.active) {
   background-color: #43c4ff;
   color: white;
 }
-
 .sidebar a.sub {
   padding: 8px;
   padding-left: 30px;
@@ -77,30 +70,13 @@ h2 ~ article {
 .sidebar a.sub.active {
   background-position: left;
 }
-
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
   height: 1000px;
 }
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
 </style>
+
 <script>
   function hasClass(id, className)
   {
@@ -233,15 +209,14 @@ div.content {
       You may configure and customize your terminal in any way you like by configuring the file <samp>~/.zshrc</samp> (or, if you use something other than zsh, <samp>~/.bashrc</samp>).<br>
       <br>Here are some important & useful customizations:<br>
       <pre></pre><code>export AWS_PROFILE=dev</code>
-      <pre></pre><code>export ENV=YOUR_ENVIRONMENT_NAME}</code>
+      <pre></pre><code>export ENV=YOUR_ENVIRONMENT_NAME</code>
       <br><br>Note that you must open a new terminal tab/window for .zshrc file changes to take effect.
     </article>
     <article>
       <h3 id="scripts">Scripts</h3>
         This is a list of scripts that can be used to maximize efficiency while you work. To run them from anywhere in your terminal, you can download them all to a single folder, and either:
         <ul>● Add that folder to your <code>export PATH=...</code> line in .zshrc</ul>
-        <ul>● Add individual aliases to your .zshrc file, like so: <code>alias someCommand="~/path/to/scripts/script.sh"</code>,<br>
-        where someCommand may be changed for whatever command you'd like to use to call the script.</ul>
+        <ul>● Add individual aliases to your .zshrc file, like so: <code>alias someCommand="~/path/to/scripts/script.sh"</code>, where someCommand may be changed for whatever command you'd like to use to call the script.</ul>
         <strong>Important:</strong> You will need to run the following command from the scripts folder, or the scripts will not run:
         <pre><code>sudo chmod +x ./*.sh</code></pre>
         <div class="script">
@@ -288,6 +263,7 @@ div.content {
           This script will list all active k8s pods on your environment, their uptime, and status.
           <br><br>Usage:<br>
           <pre><code>pods</code></pre>
+          You can also download Lens, a UI-driven tool to manage and review your Kubernetes environments. To install: <code>brew install --cask lens</code>
         </div>
       </article>
     <hr>
@@ -304,7 +280,23 @@ div.content {
     </article>
     <article>
       <h3 id="running">Running Locally</h3>
-      npmrc, bzenvk8s, etc etc
+      <ul><input type="checkbox"/> Make sure <samp>nginx</samp> is running! <code>sudo nginx</code> needs to be run when you boot up your computer.<pre></pre>
+      <ul>If you see the message <code>nginx: [emerg] bind() to 0.0.0.0:80 failed (48: Address already in use)</code>, that means it's already running. You can stop the attempt with <samp>CMD+C.</samp></ul>
+      </ul>
+      <ul><input type="checkbox"/> Bizzabo's private npm repositories require that you have a <a href="nginx.conf">💾 .npmrc</a> file with valid tokens. Place it in your <samp>~/</samp> folder (so it is <samp>~/.npmrc</samp>)</ul><pre></pre>
+      <ul><input type="checkbox"/> Clone the following repositories to your <code>/git-repos</code> folder:<pre></pre>
+        <ul>● <samp>web-dashboard</samp></ul><pre></pre>
+        <ul>● <samp>web-attendee</samp></ul><pre></pre>
+        <ul>● <samp>web-realtime</samp></ul><pre></pre>
+      </ul>
+      <ul><input type="checkbox"/> Go to <samp>/helm-assembly/scripts</samp> and run the following command: <code>./bzenvk8s YOUR_ENVIRONMENT_NAME</code><pre></pre></ul>
+      <ul>You should now be able to run projects locally: check their <samp>README</samp> for instructions, as running scripts may vary from project to project.</ul>
+      <ul>You should also make sure that your <code>/etc/hosts</code> file redirects a project's URL to 127.0.0.1 :<pre></pre>
+        <ul><code>127.0.0.1 YOUR_ENVIRONMENT_NAME-accounts.ext.dev.bizzabo.com</code> for <samp>web-dashboard</samp></ul><pre></pre>
+        <ul><code>127.0.0.1 YOUR_ENVIRONMENT_NAME-events.ext.dev.bizzabo.com</code> for <samp>web-attendee</samp></ul>
+      </ul>
+      <ul>...And so on. If you are unsure about a project's URL, ask your fellow Bizzadevs!</ul>
+      <ul>To consume local changes in provider projects, like <samp>fe-core</samp>, check their README for instructions.</ul>
     </article>
     <hr>
   <h2 id="practices">Best Practices</h2>
